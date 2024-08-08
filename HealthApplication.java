@@ -1,0 +1,125 @@
+import java.util.Scanner;
+
+// Define a class to hold personal and health details
+class Person {
+    String name;
+    int age;
+    String gender;
+    String dateOfBirth;
+    String fatherName;
+    double bloodPressure;
+    double sugarLevel;
+    double bmi;
+
+    // Constructor
+    public Person(String name, int age, String gender, String dateOfBirth, String fatherName, double bloodPressure, double sugarLevel, double bmi) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.fatherName = fatherName;
+        this.bloodPressure = bloodPressure;
+        this.sugarLevel = sugarLevel;
+        this.bmi = bmi;
+    }
+    public String getHealthAdvice() {
+        StringBuilder advice = new StringBuilder();
+
+        // Blood Pressure Advice
+        if (bloodPressure < 90) {
+            advice.append("Blood Pressure is low. Consider consulting a healthcare provider for appropriate medication like  midodrine or lifestyle changes.\n");
+        } else if (bloodPressure >= 90 && bloodPressure <= 120) {
+            advice.append("Blood Pressure is normal.\n");
+        } else {
+            advice.append("Blood Pressure is high. Consider consulting a healthcare provider for appropriate medication like  enalapril or lifestyle changes.\n");
+        }
+
+        // Sugar Level Advice
+        if (sugarLevel < 70) {
+            advice.append("Sugar Level is low. Consider consulting a healthcare provider for appropriate medication like Glucagon or lifestyle changes.\n");
+        } else if (sugarLevel >= 70 && sugarLevel <= 100) {
+            advice.append("Sugar Level is normal.\n");
+        } else {
+            advice.append("Sugar Level is high. Consider consulting a healthcare provider for appropriate medication like Metformin or lifestyle changes.\n");
+        }
+
+        // BMI Advice
+        if (bmi < 18.5) {
+            advice.append("BMI indicates underweight. Consider consulting a healthcare provider for dietary advice or nutritional guidance like eating fruits,dairy products,red meat etc.\n");
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            advice.append("BMI is normal.\n");
+        } else {
+            advice.append("BMI indicates overweight. Consider consulting a healthcare provider for advice on weight management and healthy lifestyle changes by eating healthy diet and avoid fat rich food.\n");
+        }
+
+        return advice.toString();
+    }
+
+    
+    // Method to display person details
+    public void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Gender: " + gender);
+        System.out.println("Date of Birth: " + dateOfBirth);
+        System.out.println("Father's Name: " + fatherName);
+        System.out.println("Blood Pressure: " + bloodPressure);
+        System.out.println("Sugar Level: " + sugarLevel);
+        System.out.println("BMI: " + bmi);
+        System.out.println(getHealthAdvice());
+        System.out.println();
+    }
+}
+
+public class HealthApplication {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of persons: ");
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        Person[] persons = new Person[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for person " + (i + 1) + ":");
+
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline
+
+            System.out.print("Gender: ");
+            String gender = scanner.nextLine();
+
+            System.out.print("Date of Birth (yyyy-mm-dd): ");
+            String dateOfBirth = scanner.nextLine();
+
+            System.out.print("Father's Name: ");
+            String fatherName = scanner.nextLine();
+
+            System.out.print("Blood Pressure (e.g., 120/80): ");
+            double bloodPressure = scanner.nextDouble();
+
+            System.out.print("Sugar Level (e.g., 90): ");
+            double sugarLevel = scanner.nextDouble();
+
+            System.out.print("BMI (e.g., 22.5): ");
+            double bmi = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline
+
+            persons[i] = new Person(name, age, gender, dateOfBirth, fatherName, bloodPressure, sugarLevel, bmi);
+        }
+
+        // Display all persons' details
+        System.out.println("\nDisplaying all persons' details:");
+        for (Person person : persons) {
+            person.displayDetails();
+        }
+
+        scanner.close();
+    }
+}
